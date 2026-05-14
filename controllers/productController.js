@@ -44,7 +44,7 @@ export const createProduct = async (req, res) => {
     } = req.body;
 
     const imageUrl = req.file
-      ? `http://localhost:5000/uploads/${req.file.filename}`
+      ? `http://https://e-commerce-be-34qn.onrender.com/uploads/${req.file.filename}`
       : "";
 
     const product = await Product.create({
