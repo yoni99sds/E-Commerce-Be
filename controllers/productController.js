@@ -35,16 +35,12 @@ export const getProductById = async (req, res) => {
 // =======================
 export const createProduct = async (req, res) => {
   try {
-    const {
-      name,
-      description,
-      price,
-      category,
-      stock,
-    } = req.body;
+    const { name, description, price, category, stock } = req.body;
+
+    const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get("host")}`;
 
     const imageUrl = req.file
-      ? `http://https://e-commerce-be-34qn.onrender.com/uploads/${req.file.filename}`
+      ? `${baseUrl}/uploads/${req.file.filename}`
       : "";
 
     const product = await Product.create({
@@ -59,8 +55,7 @@ export const createProduct = async (req, res) => {
     res.status(201).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
-};
+  }}
 
 // =======================
 // UPDATE PRODUCT (WITH OPTIONAL IMAGE)
