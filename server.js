@@ -19,11 +19,7 @@ import seedAdmin from "./seeds/adminSeeder.js";
 connectDB();
 
 const app = express();
-console.log("ENV CHECK (Render):", {
-  CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
-  KEY_EXISTS: !!process.env.CLOUDINARY_API_KEY,
-  SECRET_EXISTS: !!process.env.CLOUDINARY_API_SECRET,
-});
+
 /* =========================
    SAFE SEED (RUN ONCE)
    ========================= */
