@@ -37,11 +37,7 @@ export const createProduct = async (req, res) => {
   try {
     const { name, description, price, category, stock } = req.body;
 
-    const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get("host")}`;
-
-    const imageUrl = req.file
-      ? `${baseUrl}/uploads/${req.file.filename}`
-      : "";
+    const imageUrl = req.file ? req.file.path : "";
 
     const product = await Product.create({
       name,
@@ -55,8 +51,8 @@ export const createProduct = async (req, res) => {
     res.status(201).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }}
-
+  }
+};
 // =======================
 // UPDATE PRODUCT (WITH OPTIONAL IMAGE)
 // =======================
@@ -90,9 +86,8 @@ export const updateProduct = async (req, res) => {
 
     // IMAGE UPDATE
     if (req.file) {
-      product.imageUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+      product.imageUrl = req.file.path;
     }
-
     const updated = await product.save();
     res.json(updated);
   } catch (err) {
